@@ -1,0 +1,1774 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pushpendra Singh | Mechanical & Product Design Engineer</title>
+  <meta name="description" content="Mechanical & Product Design Engineer (IIT Kanpur B.Tech '26) specializing in EV Battery Systems, Electro-Mechanical Packaging, Sheet Metal, DFM, and FEA." />
+
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            slate: {
+              850: '#151e2e',
+              925: '#0c121e',
+              950: '#080c14',
+            },
+            amber: {
+              450: '#f59e0b',
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Google Model Viewer for Interactive 3D CAD (.glb / .gltf) -->
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
+
+  <style>
+    /* Precision Blueprint Grid Background */
+    .blueprint-grid {
+      background-size: 36px 36px;
+      background-image: 
+        linear-gradient(to right, rgba(56, 189, 248, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(56, 189, 248, 0.05) 1px, transparent 1px);
+    }
+    html:not(.dark) .blueprint-grid {
+      background-image: 
+        linear-gradient(to right, rgba(15, 23, 42, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(15, 23, 42, 0.04) 1px, transparent 1px);
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(148, 163, 184, 0.3);
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(148, 163, 184, 0.5);
+    }
+
+    /* Modal Backdrop Animation */
+    .modal-enter {
+      animation: modalFadeIn 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes modalFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(12px) scale(0.985);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* Print optimization for Resume/Portfolio Summary */
+    @media print {
+      .no-print { display: none !important; }
+      body { background: #ffffff !important; color: #0f172a !important; }
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 font-sans antialiased selection:bg-sky-500/30 selection:text-sky-200 blueprint-grid transition-colors duration-200">
+
+  <!-- Toast Notification (Replaces alert() for Clipboard & Status Messages) -->
+  <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+  <!-- Sticky Navigation Bar -->
+  <header class="sticky top-0 z-40 backdrop-blur-md bg-white/80 dark:bg-slate-950/80 border-b border-slate-200/80 dark:border-slate-800/80 no-print">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <!-- Brand / Monogram -->
+      <a href="#top" class="flex items-center gap-3 group">
+        <div class="w-9 h-9 rounded-lg bg-slate-900 dark:bg-sky-500/10 border border-slate-700 dark:border-sky-500/40 flex items-center justify-center font-mono font-bold text-sm text-sky-400 group-hover:border-sky-400 transition-colors">
+          PS
+        </div>
+        <div class="flex flex-col">
+          <span class="font-bold text-sm tracking-tight text-slate-900 dark:text-white leading-none">PUSHPENDRA SINGH</span>
+          <span class="font-mono text-[11px] text-slate-500 dark:text-slate-400 mt-1">MECH // EV // PRODUCT DESIGN</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="hidden md:flex items-center gap-7 text-sm font-medium text-slate-600 dark:text-slate-300">
+        <a href="#projects" class="hover:text-sky-600 dark:hover:text-sky-400 transition-colors">Case Studies</a>
+        <a href="#cad-viewer" class="hover:text-sky-600 dark:hover:text-sky-400 transition-colors">3D CAD Preview</a>
+        <a href="#experience" class="hover:text-sky-600 dark:hover:text-sky-400 transition-colors">Experience</a>
+        <a href="#skills" class="hover:text-sky-600 dark:hover:text-sky-400 transition-colors">Skills &amp; Tools</a>
+        <a href="#contact" class="hover:text-sky-600 dark:hover:text-sky-400 transition-colors">Contact</a>
+      </nav>
+
+      <!-- Action Buttons -->
+      <div class="flex items-center gap-2.5">
+        <!-- Theme Toggle -->
+        <button id="theme-toggle" aria-label="Toggle Light/Dark Theme" class="p-2.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 hover:border-sky-500/50 hover:text-sky-500 transition-all">
+          <!-- Sun Icon (shown in dark mode) -->
+          <svg id="icon-sun" class="w-4 h-4 hidden dark:block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+          </svg>
+          <!-- Moon Icon (shown in light mode) -->
+          <svg id="icon-moon" class="w-4 h-4 block dark:hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+
+        <!-- Resume PDF Button (Link your actual PDF file at assets/Pushpendra_IITK_Resume.pdf) -->
+        <a href="assets/Pushpendra_IITK_Resume.pdf" target="_blank" onclick="handleResumeClick(event)" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-mono font-semibold bg-sky-600 hover:bg-sky-500 text-white shadow-sm shadow-sky-500/20 transition-all">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="12" y1="18" x2="12" y2="12"></line>
+            <polyline points="9 15 12 18 15 15"></polyline>
+          </svg>
+          <span>RESUME.PDF</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- ==================== HERO SECTION ==================== -->
+    <section class="pt-12 pb-14 md:pt-20 md:pb-20 border-b border-slate-200/80 dark:border-slate-800/80">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        <!-- Left Column: Bio & Value Proposition -->
+        <div class="lg:col-span-7 space-y-6">
+          <div class="inline-flex items-center gap-2.5 px-3 py-1.5 rounded-full bg-sky-500/10 border border-sky-500/30 text-sky-700 dark:text-sky-300 font-mono text-xs">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span>IIT KANPUR B.TECH ’26 • MECHANICAL ENGINEERING</span>
+          </div>
+
+          <h1 class="text-4xl sm:text-5xl lg:text-[3.35rem] font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.1]">
+            Pushpendra Singh
+            <span class="block text-xl sm:text-2xl lg:text-[1.65rem] font-semibold text-sky-600 dark:text-sky-400 mt-2">
+              Mechanical &amp; Product Design Engineer
+            </span>
+          </h1>
+
+          <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed max-w-2xl">
+            Designing hardware that survives real-world loads, manufacturing constraints, and production scale. Proven track record across <strong class="text-slate-900 dark:text-white font-semibold">high-voltage EV battery enclosures</strong>, <strong class="text-slate-900 dark:text-white font-semibold">commercial electro-mechanical appliances</strong>, <strong class="text-slate-900 dark:text-white font-semibold">precision drivetrains</strong>, and <strong class="text-slate-900 dark:text-white font-semibold">medical devices</strong>—from blank-sheet CAD and ANSYS FEA to N10 pilot production and track testing.
+          </p>
+
+          <!-- Direct Contact & Quick Copy Pills -->
+          <div class="flex flex-wrap items-center gap-3 text-xs font-mono text-slate-600 dark:text-slate-400">
+            <button onclick="copyText('psmahala21@gmail.com', 'Email address')" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 transition-colors cursor-pointer" title="Click to copy email">
+              <svg class="w-3.5 h-3.5 text-sky-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              <span>psmahala21@gmail.com</span>
+            </button>
+            <button onclick="copyText('+91-7073978084', 'Phone number')" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 transition-colors cursor-pointer" title="Click to copy phone">
+              <svg class="w-3.5 h-3.5 text-sky-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <span>+91-7073978084</span>
+            </button>
+            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+              <svg class="w-3.5 h-3.5 text-amber-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span>Greater Noida / Kanpur, IN</span>
+            </span>
+          </div>
+
+          <!-- Primary CTA Buttons -->
+          <div class="pt-2 flex flex-wrap items-center gap-3.5 no-print">
+            <a href="#projects" class="px-5 py-3 rounded-xl bg-slate-900 dark:bg-sky-500 text-white dark:text-slate-950 font-semibold text-sm hover:bg-slate-800 dark:hover:bg-sky-400 transition-all shadow-lg shadow-sky-500/10 flex items-center gap-2">
+              <span>Explore Engineering Case Studies</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+            <a href="#experience" class="px-5 py-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200 font-semibold text-sm hover:border-sky-500/60 transition-all">
+              Experience &amp; Leadership
+            </a>
+            <button onclick="window.print()" class="px-4 py-3 rounded-xl bg-transparent border border-slate-300 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white font-mono text-xs transition-all">
+              Print / Save PDF
+            </button>
+          </div>
+        </div>
+
+        <!-- Right Column: Engineering Spec Card / Technical Blueprint Preview -->
+        <div class="lg:col-span-5">
+          <div class="rounded-2xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 p-5 sm:p-6 shadow-xl relative overflow-hidden">
+            <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3 mb-4">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-rose-500/80"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-amber-500/80"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500/80"></span>
+                <span class="ml-2 font-mono text-[11px] text-slate-500 dark:text-slate-400">DWG_NO: IITK-FSEV-HV88V</span>
+              </div>
+              <span class="font-mono text-[11px] px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+                FoS 3.30 // 40g FEA
+              </span>
+            </div>
+
+            <!-- Live SolidWorks HV Accumulator Internal Packaging Showcase (with SVG Blueprint Fallback) -->
+            <div onclick="openLightbox('assets/Screenshot (489).png', '88.8 V, 3.7 kWh EV Accumulator — Internal HV Packaging, Amphenol Connectors, BMS & Contactor Assembly')" class="group cursor-zoom-in rounded-xl bg-slate-950 border border-slate-800 overflow-hidden mb-4 relative">
+              <img 
+                src="assets/Screenshot (489).png" 
+                alt="88.8 V EV Accumulator Internal HV Packaging CAD" 
+                onerror="this.style.display='none'; document.getElementById('hero-svg-fallback').style.display='block';"
+                class="w-full h-56 object-contain bg-white p-2 group-hover:scale-[1.03] transition-transform duration-300"
+              />
+              <div class="absolute bottom-2.5 left-2.5 right-2.5 flex items-center justify-between px-2.5 py-1 rounded-md bg-slate-950/85 backdrop-blur-sm border border-slate-700/80 font-mono text-[10px] text-slate-200">
+                <span>SOLIDWORKS ASSY // 88.8V 3.7kWh PACK</span>
+                <span class="text-sky-400">CLICK TO ZOOM ⤢</span>
+              </div>
+
+              <!-- Fallback Blueprint SVG if Screenshot (489).png is not yet placed in assets/ -->
+              <svg id="hero-svg-fallback" style="display:none;" viewBox="0 0 420 205" class="w-full h-auto p-3" role="img" aria-label="EV Accumulator Technical Schematic">
+                <defs>
+                  <pattern id="smallGrid" width="14" height="14" patternUnits="userSpaceOnUse">
+                    <path d="M 14 0 L 0 0 0 14" fill="none" stroke="#1e293b" stroke-width="0.6"/>
+                  </pattern>
+                </defs>
+                <rect width="420" height="205" fill="url(#smallGrid)" />
+                <g stroke="#38bdf8" stroke-width="1.4" fill="none">
+                  <rect x="36" y="34" width="185" height="118" rx="4" fill="#0f172a" fill-opacity="0.85"/>
+                  <rect x="44" y="42" width="169" height="102" rx="2" stroke="#0284c7" stroke-dasharray="3 2"/>
+                  <rect x="52" y="50" width="44" height="86" fill="#1e293b" stroke="#38bdf8" stroke-width="1"/>
+                  <rect x="106" y="50" width="44" height="86" fill="#1e293b" stroke="#38bdf8" stroke-width="1"/>
+                  <rect x="160" y="50" width="44" height="86" fill="#1e293b" stroke="#38bdf8" stroke-width="1"/>
+                  <path d="M 74 50 L 74 44 L 128 44 L 128 50" stroke="#f59e0b" stroke-width="2"/>
+                  <path d="M 128 136 L 128 142 L 182 142 L 182 136" stroke="#f59e0b" stroke-width="2"/>
+                </g>
+                <g stroke="#94a3b8" stroke-width="0.8" fill="#94a3b8" font-family="JetBrains Mono, monospace" font-size="8.5">
+                  <text x="128" y="18" text-anchor="middle" fill="#e2e8f0">AL6061-T6 ENCLOSURE (-20 KG)</text>
+                  <line x1="242" y1="93" x2="282" y2="93" stroke="#f43f5e" stroke-width="1.8" />
+                  <polygon points="240,93 247,89 247,97" fill="#f43f5e" stroke="none" />
+                  <text x="287" y="90" fill="#fda4af" font-weight="bold">40g CRASH</text>
+                  <text x="287" y="101" fill="#94a3b8">FoS 3.30 MIN</text>
+                </g>
+                <g transform="translate(242, 118)">
+                  <rect width="154" height="58" rx="4" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+                  <text x="10" y="16" font-family="JetBrains Mono, monospace" font-size="8.5" fill="#38bdf8">PACK_SPEC // FSEV</text>
+                  <text x="10" y="30" font-family="JetBrains Mono, monospace" font-size="8.5" fill="#cbd5e1">V_NOM : 88.8 V | 3.7 kWh</text>
+                  <text x="10" y="43" font-family="JetBrains Mono, monospace" font-size="8.5" fill="#34d399">SCRUTINEERING: PASSED</text>
+                </g>
+              </svg>
+            </div>
+
+            <!-- Quick Domain Tags -->
+            <div class="grid grid-cols-2 gap-2.5 font-mono text-xs">
+              <div class="p-2.5 rounded-lg bg-slate-100 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800">
+                <span class="text-slate-500 block text-[10px]">PRIMARY CAD / CAE</span>
+                <span class="font-semibold text-slate-900 dark:text-slate-100">SolidWorks • ANSYS FEA</span>
+              </div>
+              <div class="p-2.5 rounded-lg bg-slate-100 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800">
+                <span class="text-slate-500 block text-[10px]">MANUFACTURING</span>
+                <span class="font-semibold text-slate-900 dark:text-slate-100">Sheet Metal • Molding • GD&amp;T</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Key Quantified Impact Bar -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-12">
+        <div class="p-4 sm:p-5 rounded-2xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800/90">
+          <div class="font-mono text-2xl sm:text-3xl font-extrabold text-sky-600 dark:text-sky-400">-20 kg</div>
+          <div class="text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300 mt-1">Accumulator Mass Saved</div>
+          <div class="font-mono text-[11px] text-slate-500 mt-0.5">Mild Steel → AL6061-T6 Redesign</div>
+        </div>
+        <div class="p-4 sm:p-5 rounded-2xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800/90">
+          <div class="font-mono text-2xl sm:text-3xl font-extrabold text-amber-600 dark:text-amber-400">40g FEA</div>
+          <div class="text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300 mt-1">Crash Load Validated</div>
+          <div class="font-mono text-[11px] text-slate-500 mt-0.5">Formula Imperial ’24 &amp; Supra ’25</div>
+        </div>
+        <div class="p-4 sm:p-5 rounded-2xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800/90">
+          <div class="font-mono text-2xl sm:text-3xl font-extrabold text-emerald-600 dark:text-emerald-400">100+ km</div>
+          <div class="text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300 mt-1">Track Validation Logged</div>
+          <div class="font-mono text-[11px] text-slate-500 mt-0.5">88.8 V, 3.7 kWh EV Powertrain</div>
+        </div>
+        <div class="p-4 sm:p-5 rounded-2xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800/90">
+          <div class="font-mono text-2xl sm:text-3xl font-extrabold text-purple-600 dark:text-purple-400">5+ SKUs</div>
+          <div class="text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300 mt-1">Taken to N5/N10 Pilot Runs</div>
+          <div class="font-mono text-[11px] text-slate-500 mt-0.5">CAD, BOM, FMEA &amp; Localization</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== FEATURED CASE STUDIES ==================== -->
+    <section id="projects" class="py-16 border-b border-slate-200/80 dark:border-slate-800/80">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
+        <div>
+          <span class="font-mono text-xs font-semibold uppercase tracking-wider text-sky-600 dark:text-sky-400">01 // ENGINEERING PORTFOLIO</span>
+          <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mt-1">Featured Hardware Case Studies</h2>
+          <p class="text-sm text-slate-600 dark:text-slate-400 mt-1 max-w-2xl">
+            Click any project to inspect the full <strong class="text-slate-800 dark:text-slate-200">STAR-E Engineering Breakdown</strong> (Specifications, Architecture &amp; Trade-offs, FEA/Analytical Validation, and Physical Build Results).
+          </p>
+        </div>
+
+        <!-- Category Filter Buttons -->
+        <div class="flex flex-wrap gap-2 no-print" id="project-filters">
+          <button data-filter="all" class="filter-btn active px-3.5 py-1.5 rounded-lg font-mono text-xs font-semibold bg-sky-600 text-white transition-all">ALL (4)</button>
+          <button data-filter="ev" class="filter-btn px-3.5 py-1.5 rounded-lg font-mono text-xs font-semibold bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:border-sky-500/50 transition-all">EV &amp; POWERTRAIN</button>
+          <button data-filter="product" class="filter-btn px-3.5 py-1.5 rounded-lg font-mono text-xs font-semibold bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:border-sky-500/50 transition-all">PRODUCT &amp; DFM</button>
+          <button data-filter="medtech" class="filter-btn px-3.5 py-1.5 rounded-lg font-mono text-xs font-semibold bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:border-sky-500/50 transition-all">MEDTECH</button>
+        </div>
+      </div>
+
+      <!-- 4-Card Project Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="projects-grid">
+
+        <!-- CARD 1: 88.8V 3.7kWh EV Accumulator -->
+        <article data-category="ev" onclick="openProjectModal('accumulator')" class="project-card group cursor-pointer rounded-2xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/70 dark:hover:border-sky-400/70 transition-all duration-200 overflow-hidden flex flex-col justify-between shadow-sm hover:shadow-xl hover:shadow-sky-500/5">
+          <div>
+            <!-- Visual Header: Real SolidWorks Internal HV Packaging CAD (Screenshot (489).png) -->
+            <div class="relative h-56 bg-white dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 flex items-center justify-center overflow-hidden">
+              <img 
+                src="assets/Screenshot (489).png" 
+                alt="88.8V 3.7kWh EV Accumulator Internal HV Packaging CAD" 
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                class="w-full h-full object-contain bg-white p-2 group-hover:scale-105 transition-transform duration-300"
+              />
+              <div class="hidden w-full h-full p-4 items-center justify-center bg-slate-950">
+                <svg viewBox="0 0 360 150" class="w-full h-full max-h-44">
+                  <rect x="30" y="22" width="300" height="106" rx="6" fill="#0f172a" stroke="#38bdf8" stroke-width="1.5"/>
+                  <rect x="42" y="34" width="76" height="82" rx="3" fill="#1e293b" stroke="#0284c7"/>
+                  <rect x="142" y="34" width="76" height="82" rx="3" fill="#1e293b" stroke="#0284c7"/>
+                  <rect x="242" y="34" width="76" height="82" rx="3" fill="#1e293b" stroke="#0284c7"/>
+                  <text x="180" y="79" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" font-weight="bold" fill="#e2e8f0">88.8 V • 3.7 kWh POUCH PACK</text>
+                  <text x="180" y="95" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#38bdf8">AL6061-T6 CHASSIS • -20 KG</text>
+                </svg>
+              </div>
+
+              <div class="absolute top-3 left-3 flex items-center gap-2">
+                <span class="px-2.5 py-1 rounded-md bg-slate-950/85 backdrop-blur-md border border-sky-400/40 font-mono text-[11px] font-semibold text-sky-300">
+                  LEAD PROJECT // 4 CAD &amp; FEA VIEWS
+                </span>
+              </div>
+              <div class="absolute bottom-3 right-3 px-2.5 py-1 rounded-md bg-slate-950/90 border border-slate-700 font-mono text-[11px] text-emerald-400">
+                Min FoS 3.30 @ 40g FEA
+              </div>
+            </div>
+
+            <!-- Card Body -->
+            <div class="p-6">
+              <div class="flex items-center justify-between text-xs font-mono text-slate-500 dark:text-slate-400 mb-2">
+                <span>IITK MOTORSPORTS</span>
+                <span>MAY 2024 – MAR 2025</span>
+              </div>
+              <h3 class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">
+                88.8 V, 3.7 kWh High-Voltage EV Accumulator
+              </h3>
+              <p class="text-sm text-slate-600 dark:text-slate-300 mt-2.5 leading-relaxed">
+                Engineered the team’s first competition-ready aluminium pouch-cell battery pack with 3-segment FR4 isolation, Amphenol HV interlocks, BMS, and active 3-fan cooling. Cut <strong class="text-slate-900 dark:text-white">20 kg</strong> via <strong class="text-slate-900 dark:text-white">AL6061-T6</strong> redesign (Min FoS 3.301 under 40g ANSYS FEA).
+              </p>
+            </div>
+          </div>
+
+          <div class="px-6 pb-6 pt-2 flex items-center justify-between border-t border-slate-100 dark:border-slate-800/80">
+            <div class="flex flex-wrap gap-1.5 font-mono text-[11px]">
+              <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">SolidWorks</span>
+              <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">ANSYS FEA</span>
+              <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">AL6061-T6</span>
+              <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">HV Safety</span>
+            </div>
+            <span class="font-mono text-xs font-semibold text-sky-600 dark:text-sky-400 group-hover:translate-x-1 transition-transform inline-flex items-center gap-1 shrink-0 ml-2">
+              Inspect <span>→</span>
+            </span>
+          </div>
+        </article>
+
+        <!-- CARD 2: Commercial Hybrid & Timed Cooktops (Isler Infra) -->
+        <article data-category="product" onclick="openProjectModal('cooktop')" class="project-card group cursor-pointer rounded-2xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 hover:border-amber-500/70 dark:hover:border-amber-400/70 transition-all duration-200 overflow-hidden flex flex-col justify-between shadow-sm hover:shadow-xl hover:shadow-amber-500/5">
+          <div>
+            <!-- Visual Header / Asset Slot 2 -->
+            <div class="relative h-52 bg-slate-950 border-b border-slate-800 p-4 flex items-center justify-center overflow-hidden">
+              <!-- TIP: Replace this SVG block with <img src="assets/hybrid-cooktop-cad.png" alt="Hybrid & Timer Cooktop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" /> -->
+              <svg viewBox="0 0 360 150" class="w-full h-full max-h-44 group-hover:scale-105 transition-transform duration-300">
+                <!-- 750x525mm Frame Top View -->
+                <rect x="45" y="18" width="270" height="114" rx="8" fill="#0f172a" stroke="#f59e0b" stroke-width="1.5"/>
+                <!-- Induction Zone (1600W) -->
+                <circle cx="102" cy="65" r="30" fill="#1e293b" stroke="#38bdf8" stroke-width="1.3" stroke-dasharray="4 2"/>
+                <text x="102" y="63" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" fill="#38bdf8">1600W</text>
+                <text x="102" y="73" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7" fill="#94a3b8">INDUCTION</text>
+                <!-- Infrared Zone (2000W) -->
+                <circle cx="180" cy="65" r="30" fill="#1e293b" stroke="#f43f5e" stroke-width="1.3"/>
+                <text x="180" y="63" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" fill="#fda4af">2000W</text>
+                <text x="180" y="73" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7" fill="#94a3b8">INFRARED</text>
+                <!-- Gas Burners + FFD Solenoid -->
+                <circle cx="258" cy="65" r="28" fill="#1e293b" stroke="#f59e0b" stroke-width="1.3"/>
+                <text x="258" y="63" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" fill="#fcd34d">GAS + FFD</text>
+                <text x="258" y="73" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7" fill="#94a3b8">SOLENOID</text>
+                <!-- Control Knobs & 7-Segment -->
+                <rect x="85" y="112" width="190" height="12" rx="2" fill="#1e293b" stroke="#475569"/>
+                <text x="180" y="120.5" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7.5" fill="#e2e8f0">750 × 525 MM • DUAL 7-SEG KNOBS • N10 PILOT</text>
+              </svg>
+
+              <div class="absolute top-3 left-3 flex items-center gap-2">
+                <span class="px-2.5 py-1 rounded-md bg-amber-500/20 backdrop-blur-md border border-amber-400/30 font-mono text-[11px] font-semibold text-amber-300">
+                  PRODUCTION DFM // APPLIANCES
+                </span>
+              </div>
+              <div class="absolute bottom-3 right-3 px-2.5 py-1 rounded-md bg-slate-900/90 border border-slate-700 font-mono text-[11px] text-amber-400">
+                N5/N10 Pilot &amp; Localization
+              </div>
+            </div>
+
+            <!-- Card Body -->
+            <div class="p-6">
+              <div class="flex items-center justify-between text-xs font-mono text-slate-500 dark:text-slate-400 mb-2">
+                <span>ISLER INFRA INDIA PVT. LTD.</span>
+                <span>JUL 2026 – PRESENT</span>
+              </div>
+              <h3 class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
+                Commercial Hybrid &amp; Electronically Timed Cooktops
+              </h3>
+              <p class="text-sm text-slate-600 dark:text-slate-300 mt-2.5 leading-relaxed">
+                End-to-end mechanical &amp; electro-mechanical product ownership across 5+ SKUs (including a <strong class="text-slate-900 dark:text-white">750×525 mm hybrid induction-infrared-gas platform</strong> and FFD solenoid-actuated timed gas cooktops). Led SolidWorks packaging, FMEA, vendor tooling, N5/N10 pilot builds, and China-to-India localization.
+              </p>
+            </div>
+          </div>
+
+          <div class="px-6 pb-6 pt-2 flex items-center justify-between border-t border-slate-100 dark:border-slate-800/80">
+            <div class="flex flex-wrap gap-1.5 font-mono text-[11px]">
+              <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Sheet Metal</span>
+              <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Injection Molding</span>
+              <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">FMEA / BOM</span>
+              <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Localization</span>
+            </div>
+            <span class="font-mono text-xs font-semibold text-amber-600 dark:text-amber-400 group-hover:translate-x-1 transition-transform inline-flex items-center gap-1 shrink-0 ml-2">
+              Inspect <span>→</span>
+            </span>
+          </div>
+        </article>
+
+        <!-- CARD 3: Powertrain & AISI 4340 Drive Shaft -->
+        <article data-category="ev" onclick="openProjectModal('powertrain')" class="project-card group cursor-pointer rounded-2xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 hover:border-emerald-500/70 dark:hover:border-emerald-400/70 transition-all duration-200 overflow-hidden flex flex-col justify-between shadow-sm hover:shadow-xl hover:shadow-emerald-500/5">
+          <div>
+            <!-- Visual Header / Asset Slot 3 -->
+            <div class="relative h-52 bg-slate-950 border-b border-slate-800 p-4 flex items-center justify-center overflow-hidden">
+              <!-- TIP: Replace this SVG block with <img src="assets/driveshaft-fea.png" alt="AISI 4340 Drive Shaft & Spline" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" /> -->
+              <svg viewBox="0 0 360 150" class="w-full h-full max-h-44 group-hover:scale-105 transition-transform duration-300">
+                <!-- Stepped Drive Shaft + Involute Spline Schematic -->
+                <line x1="25" y1="75" x2="335" y2="75" stroke="#475569" stroke-width="1" stroke-dasharray="6 3 2 3"/>
+                <!-- Left Involute Spline End -->
+                <rect x="45" y="57" width="46" height="36" rx="2" fill="#1e293b" stroke="#34d399" stroke-width="1.5"/>
+                <line x1="45" y1="63" x2="91" y2="63" stroke="#34d399" stroke-width="1"/>
+                <line x1="45" y1="69" x2="91" y2="69" stroke="#34d399" stroke-width="1"/>
+                <line x1="45" y1="81" x2="91" y2="81" stroke="#34d399" stroke-width="1"/>
+                <line x1="45" y1="87" x2="91" y2="87" stroke="#34d399" stroke-width="1"/>
+                <!-- Center Shaft Body -->
+                <rect x="91" y="63" width="178" height="24" fill="#0f172a" stroke="#38bdf8" stroke-width="1.5"/>
+                <!-- Right Involute Spline End -->
+                <rect x="269" y="57" width="46" height="36" rx="2" fill="#1e293b" stroke="#34d399" stroke-width="1.5"/>
+                <line x1="269" y1="63" x2="315" y2="63" stroke="#34d399" stroke-width="1"/>
+                <line x1="269" y1="69" x2="315" y2="69" stroke="#34d399" stroke-width="1"/>
+                <line x1="269" y1="81" x2="315" y2="81" stroke="#34d399" stroke-width="1"/>
+                <line x1="269" y1="87" x2="315" y2="87" stroke="#34d399" stroke-width="1"/>
+                <!-- Torque Arrows -->
+                <path d="M 155 44 A 24 24 0 0 1 205 44" fill="none" stroke="#f59e0b" stroke-width="1.8"/>
+                <polygon points="207,46 201,40 208,38" fill="#f59e0b"/>
+                <text x="180" y="32" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#fcd34d">ASME ELLIPTIC FATIGUE</text>
+                <text x="180" y="116" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9.5" fill="#e2e8f0">AISI 4340 ALLOY STEEL • INVOLUTE SPLINES</text>
+              </svg>
+
+              <div class="absolute top-3 left-3 flex items-center gap-2">
+                <span class="px-2.5 py-1 rounded-md bg-emerald-500/20 backdrop-blur-md border border-emerald-400/30 font-mono text-[11px] font-semibold text-emerald-300">
+                  POWERTRAIN &amp; FATIGUE
+                </span>
+              </div>
+              <div class="absolute bottom-3 right-3 px-2.5 py-1 rounded-md bg-slate-900/90 border border-slate-700 font-mono text-[11px] text-emerald-400">
+                ASME Elliptic &amp; FEM Verified
+              </div>
+            </div>
+
+            <!-- Card Body -->
+            <div class="p-6">
+              <div class="flex items-center justify-between text-xs font-mono text-slate-500 dark:text-slate-400 mb-2">
+                <span>IITK MOTORSPORTS</span>
+                <span>MAY 2024 – MAR 2025</span>
+              </div>
+              <h3 class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+                Drivetrain Optimization &amp; AISI 4340 Drive Shaft
+              </h3>
+              <p class="text-sm text-slate-600 dark:text-slate-300 mt-2.5 leading-relaxed">
+                Optimized the chain-sprocket reduction drivetrain via analytical load modeling and dynamic simulation. Engineered a lightweight <strong class="text-slate-900 dark:text-white">AISI 4340 steel drive shaft</strong> and <strong class="text-slate-900 dark:text-white">involute spline couplings</strong> using the ASME Elliptic fatigue failure criterion and high-torque FEM validation.
+              </p>
+            </div>
+          </div>
+
+          <div class="px-6 pb-6 pt-2 flex items-center justify-between border-t border-slate-100 dark:border-slate-800/80">
+            <div class="flex flex-wrap gap-1.5 font-mono text-[11px]">
+              <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">AISI 4340</span>
+              <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Fatigue FEA</span>
+              <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Involute Splines</span>
+              <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">GD&amp;T</span>
+            </div>
+            <span class="font-mono text-xs font-semibold text-emerald-600 dark:text-emerald-400 group-hover:translate-x-1 transition-transform inline-flex items-center gap-1 shrink-0 ml-2">
+              Inspect <span>→</span>
+            </span>
+          </div>
+        </article>
+
+        <!-- CARD 4: Servo-Actuated Athletic Mask & Nebulizer (Medantrik) -->
+        <article data-category="medtech product" onclick="openProjectModal('medtech')" class="project-card group cursor-pointer rounded-2xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 hover:border-purple-500/70 dark:hover:border-purple-400/70 transition-all duration-200 overflow-hidden flex flex-col justify-between shadow-sm hover:shadow-xl hover:shadow-purple-500/5">
+          <div>
+            <!-- Visual Header: Real SolidWorks Wearable Mask & Airflow Valve CAD (image_f906c1.png) -->
+            <div class="relative h-56 bg-[#9aa7b8] dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 flex items-center justify-center overflow-hidden">
+              <img 
+                src="assets/image_f906c1.png" 
+                alt="Servo-Actuated Wearable Athletic Mask & Airflow Control Valve CAD" 
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                class="w-full h-full object-contain bg-[#a4b0c0] p-2 group-hover:scale-105 transition-transform duration-300"
+              />
+              <div class="hidden w-full h-full p-4 items-center justify-center bg-slate-950">
+                <svg viewBox="0 0 360 150" class="w-full h-full max-h-44">
+                  <path d="M 110 38 C 145 20, 215 20, 250 38 C 268 58, 260 105, 222 120 C 195 130, 165 130, 138 120 C 100 105, 92 58, 110 38 Z" fill="#0f172a" stroke="#c084fc" stroke-width="1.6"/>
+                  <circle cx="180" cy="76" r="24" fill="#1e293b" stroke="#f59e0b" stroke-width="1.5"/>
+                  <text x="180" y="142" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#e2e8f0">SERVO-ACTUATED AIRFLOW VALVE &amp; SEAL</text>
+                </svg>
+              </div>
+
+              <div class="absolute top-3 left-3 flex items-center gap-2">
+                <span class="px-2.5 py-1 rounded-md bg-slate-950/85 backdrop-blur-md border border-purple-400/40 font-mono text-[11px] font-semibold text-purple-300">
+                  MEDICAL DEVICE // SURFACING
+                </span>
+              </div>
+              <div class="absolute bottom-3 right-3 px-2.5 py-1 rounded-md bg-slate-950/90 border border-slate-700 font-mono text-[11px] text-purple-300">
+                Ergonomics &amp; Flow Simulation
+              </div>
+            </div>
+
+            <!-- Card Body -->
+            <div class="p-6">
+              <div class="flex items-center justify-between text-xs font-mono text-slate-500 dark:text-slate-400 mb-2">
+                <span>MEDANTRIK MEDTECH PVT. LTD.</span>
+                <span>MAY 2025 – AUG 2025</span>
+              </div>
+              <h3 class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+                Servo-Actuated Wearable Athletic Mask &amp; Nebulizer
+              </h3>
+              <p class="text-sm text-slate-600 dark:text-slate-300 mt-2.5 leading-relaxed">
+                Engineered a wearable respiratory training mask integrating a <strong class="text-slate-900 dark:text-white">micro-servo actuated cylindrical airflow valve</strong> for lung-capacity monitoring. Executed iterative SolidWorks surfacing for facial sealing efficiency alongside a variable-flow nebulizer validated via flow simulations.
+              </p>
+            </div>
+          </div>
+
+          <div class="px-6 pb-6 pt-2 flex items-center justify-between border-t border-slate-100 dark:border-slate-800/80">
+            <div class="flex flex-wrap gap-1.5 font-mono text-[11px]">
+              <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Surfacing</span>
+              <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Servo Mechanism</span>
+              <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Flow Sim</span>
+              <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">2D DFM</span>
+            </div>
+            <span class="font-mono text-xs font-semibold text-purple-600 dark:text-purple-400 group-hover:translate-x-1 transition-transform inline-flex items-center gap-1 shrink-0 ml-2">
+              Inspect <span>→</span>
+            </span>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ==================== INTERACTIVE 3D CAD VIEWER SECTION ==================== -->
+    <section id="cad-viewer" class="py-16 border-b border-slate-200/80 dark:border-slate-800/80">
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4 mb-8">
+        <div>
+          <span class="font-mono text-xs font-semibold uppercase tracking-wider text-sky-600 dark:text-sky-400">02 // INTERACTIVE CAD BENCHMARK</span>
+          <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mt-1">3D Assembly Inspection Bay</h2>
+          <p class="text-sm text-slate-600 dark:text-slate-400 mt-1 max-w-2xl">
+            Drag to orbit, scroll to zoom, and inspect structural packaging geometry directly in the browser. Ready for <code class="font-mono text-xs px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-800">.glb</code> / <code class="font-mono text-xs px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-800">.gltf</code> exports from SolidWorks.
+          </p>
+        </div>
+
+        <!-- Model Switcher Tabs -->
+        <div class="flex flex-wrap gap-2 no-print">
+          <button onclick="switchCadModel('accumulator')" id="cad-tab-accumulator" class="cad-tab active px-3.5 py-2 rounded-lg font-mono text-xs font-semibold bg-sky-600 text-white transition-all">
+            01. EV Accumulator (AL6061)
+          </button>
+          <button onclick="switchCadModel('shaft')" id="cad-tab-shaft" class="cad-tab px-3.5 py-2 rounded-lg font-mono text-xs font-semibold bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:border-sky-500/50 transition-all">
+            02. AISI 4340 Drive Shaft
+          </button>
+          <button onclick="switchCadModel('mask')" id="cad-tab-mask" class="cad-tab px-3.5 py-2 rounded-lg font-mono text-xs font-semibold bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:border-sky-500/50 transition-all">
+            03. Servo Airflow Valve
+          </button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        <!-- Left 8 Cols: Interactive 3D Canvas / Model-Viewer Container -->
+        <div class="lg:col-span-8 rounded-2xl bg-slate-950 border border-slate-800 overflow-hidden relative min-h-[380px] flex flex-col">
+          <!-- Top HUD Bar -->
+          <div class="px-4 py-2.5 bg-slate-900/90 border-b border-slate-800 flex items-center justify-between text-xs font-mono text-slate-400">
+            <span id="cad-hud-title">MODEL: AL6061_T6_ACCUMULATOR_ASSY.GLB</span>
+            <span class="text-sky-400">DRAG TO ROTATE • SCROLL TO ZOOM</span>
+          </div>
+
+          <!-- 
+            DEPLOYMENT NOTE FOR PUSHPENDRA:
+            Once you export your SolidWorks assemblies to .glb (via Blender or SolidWorks XR Exporter) 
+            and place them in /assets/models/, uncomment the <model-viewer> tag below and hide #interactive-wireframe-canvas!
+          -->
+          <!--
+          <model-viewer
+            id="real-glb-viewer"
+            src="assets/models/accumulator-enclosure.glb"
+            alt="3D CAD Assembly"
+            auto-rotate
+            camera-controls
+            shadow-intensity="1"
+            class="w-full h-[360px] bg-slate-950">
+          </model-viewer>
+          -->
+
+          <!-- Built-In Interactive 3D Orthographic/Perspective Wireframe Canvas (Works 100% Standalone Out-of-the-Box) -->
+          <div id="interactive-wireframe-wrapper" class="relative flex-1 w-full min-h-[340px] cursor-grab active:cursor-grabbing">
+            <canvas id="cad-canvas" class="w-full h-full block"></canvas>
+            <div class="absolute bottom-3 left-3 right-3 flex flex-wrap items-center justify-between gap-2 pointer-events-none">
+              <span class="px-2.5 py-1 rounded bg-slate-900/85 border border-slate-800 font-mono text-[11px] text-slate-300">
+                Interactive 3D Wireframe Preview (Swap with <code class="text-sky-400">.glb</code> anytime)
+              </span>
+              <button onclick="resetCadCamera()" class="pointer-events-auto px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-200 font-mono text-[11px] border border-slate-700 transition-colors">
+                Reset View
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right 4 Cols: Live Engineering Spec Sheet for Active Model -->
+        <div class="lg:col-span-4 rounded-2xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 p-6 flex flex-col justify-between">
+          <div>
+            <div class="font-mono text-xs text-sky-600 dark:text-sky-400 font-semibold mb-1" id="cad-spec-tag">HIGH VOLTAGE SUBSYSTEM</div>
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white" id="cad-spec-name">AL6061-T6 Accumulator Enclosure</h3>
+            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-2 leading-relaxed" id="cad-spec-desc">
+              Lightweight welded &amp; fastened aluminium 6061-T6 structural housing designed to house 88.8 V pouch-cell modules, HV busbars, AIRs, and BMS with isolated maintenance access.
+            </p>
+
+            <div class="mt-5 space-y-2.5 border-t border-slate-200 dark:border-slate-800 pt-4 font-mono text-xs" id="cad-spec-table">
+              <!-- Populated dynamically via JS -->
+            </div>
+          </div>
+
+          <button id="cad-open-case-btn" onclick="openProjectModal('accumulator')" class="mt-6 w-full py-2.5 px-4 rounded-xl bg-slate-900 dark:bg-sky-500/15 hover:bg-slate-800 dark:hover:bg-sky-500/25 text-white dark:text-sky-300 border border-slate-700 dark:border-sky-500/40 font-mono text-xs font-semibold transition-all">
+            Open Full Case Study &amp; FEA Data →
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== EXPERIENCE, LEADERSHIP & EDUCATION ==================== -->
+    <section id="experience" class="py-16 border-b border-slate-200/80 dark:border-slate-800/80">
+      <div class="mb-10">
+        <span class="font-mono text-xs font-semibold uppercase tracking-wider text-sky-600 dark:text-sky-400">03 // TRACK RECORD</span>
+        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mt-1">Experience, Leadership &amp; Education</h2>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+        <!-- Left 8 Cols: Chronological Industry & Formula Student Timeline -->
+        <div class="lg:col-span-8 space-y-6">
+
+          <!-- Role 1: Isler Infra -->
+          <div class="relative pl-6 sm:pl-8 border-l-2 border-amber-500">
+            <span class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-amber-500 border-4 border-slate-50 dark:border-slate-950"></span>
+            <div class="p-5 sm:p-6 rounded-2xl bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <div>
+                  <h3 class="text-lg font-bold text-slate-900 dark:text-white">Product Designer</h3>
+                  <p class="text-sm font-semibold text-amber-600 dark:text-amber-400">Isler Infra India Pvt. Ltd. • Kitchen Appliances</p>
+                </div>
+                <span class="font-mono text-xs px-2.5 py-1 rounded-md bg-amber-500/10 text-amber-700 dark:text-amber-300 border border-amber-500/20">
+                  Jul 2026 – Present
+                </span>
+              </div>
+              <ul class="mt-4 space-y-2 text-sm text-slate-600 dark:text-slate-300 list-disc list-inside marker:text-amber-500">
+                <li>Designed <strong>Timer Cooktop, Hybrid Cooktop, 5-Burner Cooktop, Localized Built-in Cooktop, and Localized Built-in Hob</strong>—delivering complete 3D CAD models, assemblies, and manufacturing documentation from concept to prototype.</li>
+                <li>Owned end-to-end NPD execution: project timelines, <strong>BOM, PFD, PFC, FMEA</strong>, technical proposals, vendor coordination, sourcing, and prototype builds.</li>
+                <li>Coordinated prototype assembly, testing, and validation, followed by <strong>IQC/OQC activities and N5/N10 pilot production trials</strong> leading to PD–PS handover.</li>
+                <li>Drove <strong>China-to-India localization</strong> of built-in cooktop and hob lines by tearing down imported designs, identifying localizable sheet-metal/plastic parts, and optimizing unit margins.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Role 2: Medantrik Medtech -->
+          <div class="relative pl-6 sm:pl-8 border-l-2 border-purple-500">
+            <span class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-purple-500 border-4 border-slate-50 dark:border-slate-950"></span>
+            <div class="p-5 sm:p-6 rounded-2xl bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <div>
+                  <h3 class="text-lg font-bold text-slate-900 dark:text-white">Product Design Intern</h3>
+                  <p class="text-sm font-semibold text-purple-600 dark:text-purple-400">Medantrik Medtech Pvt. Ltd. • Medical Device Design</p>
+                </div>
+                <span class="font-mono text-xs px-2.5 py-1 rounded-md bg-purple-500/10 text-purple-700 dark:text-purple-300 border border-purple-500/20">
+                  May 2025 – Aug 2025
+                </span>
+              </div>
+              <ul class="mt-4 space-y-2 text-sm text-slate-600 dark:text-slate-300 list-disc list-inside marker:text-purple-500">
+                <li>Engineered a wearable athletic mask with <strong>servo-actuated airflow control</strong> for respiratory training and lung-capacity monitoring.</li>
+                <li>Executed multiple SolidWorks surfacing and solid modeling iterations to maximize facial ergonomics, perimeter sealing efficiency, and user comfort.</li>
+                <li>Designed a <strong>variable airflow-control nebulizer</strong>, evaluating internal flow performance via CAD and simulations alongside manufacturing-ready 2D documentation.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Role 3: IITK Motorsports -->
+          <div class="relative pl-6 sm:pl-8 border-l-2 border-sky-500">
+            <span class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-sky-500 border-4 border-slate-50 dark:border-slate-950"></span>
+            <div class="p-5 sm:p-6 rounded-2xl bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <div>
+                  <h3 class="text-lg font-bold text-slate-900 dark:text-white">Senior Technical Member — HV, Powertrain &amp; Team Leadership</h3>
+                  <p class="text-sm font-semibold text-sky-600 dark:text-sky-400">IITK Motorsports (Formula Student EV Team) • Team Size: 55+</p>
+                </div>
+                <span class="font-mono text-xs px-2.5 py-1 rounded-md bg-sky-500/10 text-sky-700 dark:text-sky-300 border border-sky-500/20">
+                  Mar 2024 – Mar 2025
+                </span>
+              </div>
+              <ul class="mt-4 space-y-2 text-sm text-slate-600 dark:text-slate-300 list-disc list-inside marker:text-sky-500">
+                <li><strong>High-Voltage Subsystem:</strong> Designed and manufactured the team’s first competition-ready <strong>88.8 V, 3.7 kWh AL6061-T6 accumulator</strong> (-20 kg mass reduction; 40g ANSYS FEA validated; 100+ km track testing).</li>
+                <li><strong>Powertrain Subsystem:</strong> Engineered chain-sprocket drivetrain, <strong>AISI 4340 drive shaft</strong> (ASME Elliptic fatigue validated), and high-torque involute spline connections.</li>
+                <li><strong>Cross-Functional Leadership:</strong> Led 55+ members across design, fabrication, and vehicle integration; recruited and onboarded <strong>42 new members</strong> (+46% freshman applications) and organized IITK’s first EV launch (450+ attendees).</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right 4 Cols: Education & National Awards -->
+        <div class="lg:col-span-4 space-y-6">
+          <!-- Education Card -->
+          <div class="p-6 rounded-2xl bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800">
+            <span class="font-mono text-xs text-sky-600 dark:text-sky-400 font-semibold">EDUCATION</span>
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mt-1">B.Tech, Mechanical Engineering</h3>
+            <p class="text-sm font-medium text-slate-700 dark:text-slate-300 mt-0.5">Indian Institute of Technology Kanpur</p>
+            <p class="font-mono text-xs text-slate-500 mt-1">2022 – 2026 • Kanpur, India</p>
+            <div class="mt-4 pt-4 border-t border-slate-200 dark:border-slate-800 text-xs text-slate-600 dark:text-slate-400 space-y-1.5">
+              <p><strong class="text-slate-800 dark:text-slate-200">Core Coursework:</strong> Machine Design, Solid Mechanics, Manufacturing Processes, Heat Transfer, Fluid Mechanics, Control Systems, Robotics.</p>
+            </div>
+          </div>
+
+          <!-- Achievements Card -->
+          <div class="p-6 rounded-2xl bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800">
+            <span class="font-mono text-xs text-amber-600 dark:text-amber-400 font-semibold">COMPETITION HONORS</span>
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mt-1">National Engineering Awards</h3>
+
+            <div class="mt-4 space-y-4">
+              <div class="p-3.5 rounded-xl bg-amber-500/5 border border-amber-500/20">
+                <div class="font-mono text-xs font-bold text-amber-600 dark:text-amber-400">FORMULA IMPERIAL 2024</div>
+                <div class="text-sm font-bold text-slate-900 dark:text-white mt-0.5">Overall EV Champion</div>
+                <p class="text-xs text-slate-600 dark:text-slate-300 mt-1">
+                  1st Place in <strong>Engineering Design</strong>, <strong>Innovation</strong>, <strong>Business Plan</strong>, and <strong>People’s Choice</strong> categories.
+                </p>
+              </div>
+
+              <div class="p-3.5 rounded-xl bg-sky-500/5 border border-sky-500/20">
+                <div class="font-mono text-xs font-bold text-sky-600 dark:text-sky-400">FORMULA BHARAT 2024</div>
+                <div class="text-sm font-bold text-slate-900 dark:text-white mt-0.5">MathWorks Modeling Award</div>
+                <p class="text-xs text-slate-600 dark:text-slate-300 mt-1">
+                  Advanced to Stage 1 among 55 national Formula Student teams for vehicle/powertrain simulation modeling.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TECHNICAL SKILLS MATRIX ==================== -->
+    <section id="skills" class="py-16 border-b border-slate-200/80 dark:border-slate-800/80">
+      <div class="mb-10">
+        <span class="font-mono text-xs font-semibold uppercase tracking-wider text-sky-600 dark:text-sky-400">04 // CAPABILITIES</span>
+        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mt-1">Technical Stack &amp; Engineering Tools</h2>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <!-- Skill Pillar 1 -->
+        <div class="p-5 rounded-2xl bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800">
+          <div class="w-9 h-9 rounded-lg bg-sky-500/10 border border-sky-500/30 flex items-center justify-center text-sky-500 mb-4">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+          </div>
+          <h3 class="font-bold text-base text-slate-900 dark:text-white">CAD, CAE &amp; GD&amp;T</h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 mb-4">3D Modeling, Structural &amp; Fatigue FEA</p>
+          <div class="flex flex-wrap gap-1.5 font-mono text-xs">
+            <span class="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">SolidWorks</span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">ANSYS Mechanical</span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">Structural FEA</span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">Fatigue Analysis</span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">GD&amp;T (ASME Y14.5)</span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">Surfacing</span>
+          </div>
+        </div>
+
+        <!-- Skill Pillar 2 -->
+        <div class="p-5 rounded-2xl bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800">
+          <div class="w-9 h-9 rounded-lg bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-500 mb-4">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          </div>
+          <h3 class="font-bold text-base text-slate-900 dark:text-white">EV Systems &amp; DFM</h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 mb-4">Automotive &amp; Production Engineering</p>
+          <div class="flex flex-wrap gap-1.5 font-mono text-xs">
+            <span class="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">EV Battery Packs</span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">Powertrain Design</span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">Involute Splines</span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">Sheet Metal DFM</span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">Injection Molding</span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">FMEA / BOM / N10</span>
+          </div>
+        </div>
+
+        <!-- Skill Pillar 3 -->
+        <div class="p-5 rounded-2xl bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800">
+          <div class="w-9 h-9 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-500 mb-4">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          </div>
+          <h3 class="font-bold text-base text-slate-900 dark:text-white">Simulation &amp; Code</h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 mb-4">Analytical Modeling &amp; Version Control</p>
+          <div class="flex flex-wrap gap-1.5 font-mono text-xs">
+            <span class="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">MATLAB / Simulink</span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">Python</span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">C</span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">Git / GitHub</span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">LaTeX</span>
+          </div>
+        </div>
+
+        <!-- Skill Pillar 4 -->
+        <div class="p-5 rounded-2xl bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800">
+          <div class="w-9 h-9 rounded-lg bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-500 mb-4">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          </div>
+          <h3 class="font-bold text-base text-slate-900 dark:text-white">Data &amp; Telemetry</h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 mb-4">Test Data Analysis &amp; ML Tooling</p>
+          <div class="flex flex-wrap gap-1.5 font-mono text-xs">
+            <span class="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">NumPy</span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">Pandas</span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">Matplotlib</span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">TensorFlow</span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">Keras</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== CONTACT & DEPLOYMENT FOOTER ==================== -->
+    <footer id="contact" class="py-16">
+      <div class="rounded-3xl bg-slate-900 dark:bg-slate-900/90 border border-slate-800 p-8 sm:p-10 text-white flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
+        <div class="space-y-3 max-w-xl">
+          <span class="font-mono text-xs text-sky-400 font-semibold uppercase tracking-wider">05 // LET’S BUILD HARDWARE</span>
+          <h2 class="text-2xl sm:text-3xl font-bold">Open to Mechanical Design, EV Systems &amp; Product Engineering Roles</h2>
+          <p class="text-sm text-slate-300 leading-relaxed">
+            Available for technical interviews and full-time engineering opportunities. Reach out directly via email or phone, or download my full PDF resume.
+          </p>
+        </div>
+
+        <div class="flex flex-col sm:flex-row lg:flex-col gap-3 w-full lg:w-auto">
+          <button onclick="copyText('psmahala21@gmail.com', 'Email address')" class="px-5 py-3 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-mono text-xs font-bold flex items-center justify-between gap-4 transition-all cursor-pointer">
+            <span>psmahala21@gmail.com</span>
+            <span class="px-2 py-0.5 rounded bg-slate-950/15 text-[10px]">COPY</span>
+          </button>
+          <button onclick="copyText('+91-7073978084', 'Phone number')" class="px-5 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-100 border border-slate-700 font-mono text-xs font-semibold flex items-center justify-between gap-4 transition-all cursor-pointer">
+            <span>+91-7073978084</span>
+            <span class="px-2 py-0.5 rounded bg-slate-950/40 text-[10px]">COPY</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-500">
+        <div>© 2026 Pushpendra Singh • B.Tech Mechanical Engineering, IIT Kanpur</div>
+        <div>Engineered as a single-file static portfolio for GitHub Pages</div>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- ==================== CASE STUDY MODAL (STAR-E FRAMEWORK) ==================== -->
+  <div id="project-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-3 sm:p-6 bg-slate-950/80 backdrop-blur-sm overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-enter relative w-full max-w-4xl rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-2xl overflow-hidden my-auto max-h-[92vh] flex flex-col">
+      
+      <!-- Modal Header -->
+      <div class="px-5 sm:px-7 py-4 bg-slate-50 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 flex items-start justify-between gap-4 shrink-0">
+        <div>
+          <div class="flex flex-wrap items-center gap-2 font-mono text-xs text-sky-600 dark:text-sky-400">
+            <span id="modal-org">IITK MOTORSPORTS</span>
+            <span>•</span>
+            <span id="modal-period">MAY 2024 – MAR 2025</span>
+          </div>
+          <h3 id="modal-title" class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mt-1">
+            Project Title
+          </h3>
+        </div>
+        <button onclick="closeProjectModal()" aria-label="Close Case Study Modal" class="p-2 rounded-lg bg-slate-200/70 dark:bg-slate-800 hover:bg-rose-500/20 hover:text-rose-500 text-slate-600 dark:text-slate-300 transition-colors">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+
+      <!-- STAR-E Navigation Tabs -->
+      <div class="px-5 sm:px-7 py-2.5 bg-slate-100/70 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 flex items-center gap-2 overflow-x-auto shrink-0">
+        <button onclick="switchModalTab('overview')" id="mtab-overview" class="mtab active px-3 py-1.5 rounded-lg font-mono text-xs font-semibold bg-sky-600 text-white whitespace-nowrap transition-all">
+          01. Overview &amp; Specs
+        </button>
+        <button onclick="switchModalTab('architecture')" id="mtab-architecture" class="mtab px-3 py-1.5 rounded-lg font-mono text-xs font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-200/70 dark:hover:bg-slate-800 whitespace-nowrap transition-all">
+          02. Architecture &amp; Trade-offs
+        </button>
+        <button onclick="switchModalTab('validation')" id="mtab-validation" class="mtab px-3 py-1.5 rounded-lg font-mono text-xs font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-200/70 dark:hover:bg-slate-800 whitespace-nowrap transition-all">
+          03. Engineering Validation / FEA
+        </button>
+        <button onclick="switchModalTab('results')" id="mtab-results" class="mtab px-3 py-1.5 rounded-lg font-mono text-xs font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-200/70 dark:hover:bg-slate-800 whitespace-nowrap transition-all">
+          04. Physical Build &amp; Outcomes
+        </button>
+      </div>
+
+      <!-- Scrollable Modal Body -->
+      <div id="modal-body" class="p-5 sm:p-7 overflow-y-auto space-y-6 text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+        <!-- Dynamically injected per project & tab -->
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="px-5 sm:px-7 py-3.5 bg-slate-50 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between gap-4 shrink-0">
+        <div id="modal-tags" class="flex flex-wrap gap-1.5 font-mono text-[11px]"></div>
+        <button onclick="closeProjectModal()" class="px-4 py-2 rounded-lg bg-slate-900 dark:bg-slate-800 text-white font-mono text-xs font-semibold hover:bg-slate-700 transition-colors shrink-0">
+          Close [ESC]
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== FULL-SCREEN CAD / FEA LIGHTBOX VIEWER ==================== -->
+  <div id="image-lightbox" class="fixed inset-0 z-[60] hidden items-center justify-center p-4 sm:p-8 bg-slate-950/92 backdrop-blur-md" role="dialog" aria-modal="true" aria-label="Full Resolution Engineering Drawing Lightbox">
+    <div class="relative max-w-6xl w-full flex flex-col items-center">
+      <div class="w-full flex items-center justify-between mb-3 px-2">
+        <span id="lightbox-caption" class="font-mono text-xs sm:text-sm text-slate-200">Engineering Artifact</span>
+        <button onclick="closeLightbox()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-rose-600 text-white font-mono text-xs font-semibold transition-colors">
+          Close Zoom [ESC]
+        </button>
+      </div>
+      <div class="w-full rounded-2xl overflow-hidden border border-slate-700 bg-white flex items-center justify-center max-h-[82vh]">
+        <img id="lightbox-img" src="" alt="Zoomed Engineering Artifact" class="max-w-full max-h-[80vh] object-contain" />
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== JAVASCRIPT LOGIC & DATA ==================== -->
+  <script>
+    // ---------------------------------------------------------
+    // 1. THEME TOGGLE (Dark / Light Mode with LocalStorage)
+    // ---------------------------------------------------------
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const htmlEl = document.documentElement;
+
+    if (localStorage.getItem('ps-theme') === 'light') {
+      htmlEl.classList.remove('dark');
+    }
+
+    themeToggleBtn.addEventListener('click', () => {
+      htmlEl.classList.toggle('dark');
+      const isDark = htmlEl.classList.contains('dark');
+      localStorage.setItem('ps-theme', isDark ? 'dark' : 'light');
+    });
+
+    // ---------------------------------------------------------
+    // 2. TOAST NOTIFICATION & CLIPBOARD HELPER (No alert())
+    // ---------------------------------------------------------
+    function showToast(message) {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      toast.className = 'px-4 py-2.5 rounded-xl bg-slate-900 text-white border border-sky-500/40 shadow-lg font-mono text-xs flex items-center gap-2 transition-all duration-200';
+      toast.innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-400"></span><span>${message}</span>`;
+      container.appendChild(toast);
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(6px)';
+        setTimeout(() => toast.remove(), 220);
+      }, 2600);
+    }
+
+    function copyText(text, label) {
+      const tempInput = document.createElement('input');
+      tempInput.value = text;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempInput);
+      showToast(`${label} copied: ${text}`);
+    }
+
+    function handleResumeClick(e) {
+      // If deployed without the PDF yet, notify cleanly while still letting browser attempt open
+      showToast('Opening assets/Pushpendra_IITK_Resume.pdf');
+    }
+
+    // ---------------------------------------------------------
+    // 3. PROJECT CATEGORY FILTERING
+    // ---------------------------------------------------------
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterButtons.forEach(b => {
+          b.classList.remove('active', 'bg-sky-600', 'text-white');
+          b.classList.add('bg-white', 'dark:bg-slate-900', 'text-slate-600', 'dark:text-slate-300');
+        });
+        btn.classList.add('active', 'bg-sky-600', 'text-white');
+        btn.classList.remove('bg-white', 'dark:bg-slate-900', 'text-slate-600', 'dark:text-slate-300');
+
+        const filter = btn.getAttribute('data-filter');
+        projectCards.forEach(card => {
+          const categories = card.getAttribute('data-category');
+          if (filter === 'all' || categories.includes(filter)) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // ---------------------------------------------------------
+    // 4. STAR-E CASE STUDY DATA & INTERACTIVE MODAL
+    // ---------------------------------------------------------
+    const caseStudies = {
+      accumulator: {
+        org: 'IITK MOTORSPORTS (FORMULA STUDENT EV)',
+        period: 'MAY 2024 – MAR 2025',
+        title: '88.8 V, 3.7 kWh High-Voltage EV Accumulator System',
+        tags: ['SolidWorks', 'ANSYS Mechanical', 'AL6061-T6', '40g Crash FEA', 'HV Isolation', 'FSEV Rules'],
+        tabs: {
+          overview: {
+            kpis: [
+              { label: 'NOMINAL VOLTAGE / ENERGY', val: '88.8 V / 3.7 kWh' },
+              { label: 'MASS REDUCTION', val: '-20.0 kg Saved' },
+              { label: 'MIN SAFETY FACTOR (40g)', val: '3.301 (ANSYS FEA)' },
+              { label: 'TRACK VALIDATION', val: '100+ km Logged' }
+            ],
+            heading: 'Closed Enclosure & Active Thermal Airflow Architecture',
+            paragraphs: [
+              'As Senior Technical Member of the High-Voltage Subsystem at IITK Motorsports, I led the mechanical design and fabrication of the team’s first competition-ready aluminium pouch-cell accumulator pack.',
+              'The closed AL6061-T6 enclosure integrates three top-mounted 8010 axial cooling fans over isolated cell-stack channels, bolted side maintenance panels, chassis mounting tabs, and an external HV service disconnect interface—saving 20 kg over the previous mild steel design while clearing Formula Imperial ’24 and SAE Supra ’25 scrutineering.'
+            ],
+            assetSlot: {
+              filename: 'assets/Screenshot (490).jpg',
+              bgClass: 'bg-white',
+              caption: 'SolidWorks Isometric Assembly: Closed AL6061-T6 EV Accumulator Enclosure featuring 3x top-mounted 8010 cooling fans, bolted perimeter shear panels, and rear HV service disconnect.'
+            }
+          },
+          architecture: {
+            kpis: [
+              { label: 'SEGMENTATION', val: '3 Isolated HV Sub-Packs' },
+              { label: 'HV CONNECTORS', val: 'Amphenol Right-Angle HV' },
+              { label: 'SAFETY & MONITORING', val: 'Bender IMD + Contactor' },
+              { label: 'THERMAL / HV ISOLATION', val: 'FR4 Finned Wall Barriers' }
+            ],
+            heading: 'Internal High-Voltage Packaging & Sub-Module Architecture',
+            paragraphs: [
+              'Segmented the 88.8 V pack into three electrically isolated sub-compartments separated by AL6061-T6 internal bulkheads and yellow FR4 insulating covers, linked via shielded Amphenol right-angle high-voltage connectors.',
+              'Packaged the main HV contactor, current sensor, Bussmann 160A fuse, Bender ISOMETER IMD, and finned BMS heatsink assembly into a dedicated front low-voltage/HV maintenance bay with clearly segregated creepage and clearance paths.'
+            ],
+            assetSlot: {
+              filename: 'assets/Screenshot (489).png',
+              bgClass: 'bg-white',
+              caption: 'SolidWorks Internal Packaging Assembly: 3-segment pouch-cell layout with yellow FR4 covers, Amphenol HV harnesses, finned BMS controller, Bender IMD, and main HV contactor.'
+            }
+          },
+          validation: {
+            kpis: [
+              { label: 'CRASH LOAD CASE', val: '40g Static Structural' },
+              { label: 'MIN SAFETY FACTOR', val: '3.301 (Mounting Tabs)' },
+              { label: 'MAX SAFETY FACTOR', val: '15.0 (Main Ribbed Body)' },
+              { label: 'SCRUTINEERING STATUS', val: 'Cleared (FI ’24 & Supra ’25)' }
+            ],
+            heading: '40g ANSYS Mechanical Structural FEA & Ribbed Wall Optimization',
+            paragraphs: [
+              'Performed static structural finite element analysis in ANSYS Mechanical under Formula Student rulebook crash deceleration loads (40g longitudinal/lateral, 20g vertical) on the ribbed AL6061-T6 cell-module housing.',
+              'By adding vertical stiffening fins along the side walls and gusseted base flanges, the structure achieved a minimum safety factor of 3.301 at the critical chassis mounting lugs (and 15.0 across the primary enclosure walls), preventing plastic deformation under peak crash loads.'
+            ],
+            assetSlot: {
+              filename: 'assets/IMG-20240822-WA0013[2].jpg',
+              bgClass: 'bg-white',
+              caption: 'ANSYS Mechanical Static Structural Safety Factor Contour: Minimum FoS = 3.301 at mounting brackets, Maximum FoS = 15 across the vertically ribbed AL6061-T6 sub-structure.'
+            }
+          },
+          results: {
+            kpis: [
+              { label: 'CELL MODULE', val: '12x 21Ah Pouch Stack' },
+              { label: 'WALL ISOLATION', val: 'Slotted FR4 Fin Liners' },
+              { label: 'COMPETITION RESULT', val: 'Overall EV Champion' },
+              { label: 'ENDURANCE TESTING', val: '100+ km Track Run' }
+            ],
+            heading: 'Exploded Cell-Stack DFM, FR4 Finned Liners & 100+ km Track Testing',
+            paragraphs: [
+              'Designed each 21Ah pouch-cell sub-module with precision-slotted FR4 insulating wall liners and finned aluminium compression plates to prevent cell swelling while channeling cooling air across cell tabs and copper busbars.',
+              'The fabricated pack cleared technical inspection at Formula Imperial 2024 (winning Overall EV Champion & 1st in Engineering Design) and SAE Supra 2025, logging 100+ km of fault-free track testing.'
+            ],
+            assetSlot: {
+              filename: 'assets/Screenshot (496).jpg',
+              bgClass: 'bg-white',
+              caption: 'SolidWorks Exploded View: Single 21Ah pouch-cell stack (12 cells), copper busbar interconnect tray, slotted FR4 electrical isolation walls, and externally finned AL6061-T6 side plates.'
+            }
+          }
+        }
+      },
+
+      cooktop: {
+        org: 'ISLER INFRA INDIA PVT. LTD.',
+        period: 'JUL 2026 – PRESENT',
+        title: 'Commercial Hybrid & Electronically Timed Cooktop Systems',
+        tags: ['SolidWorks DFM', 'Sheet Metal', 'Injection Molding', 'FMEA / BOM', 'N5/N10 Pilot', 'Localization'],
+        tabs: {
+          overview: {
+            kpis: [
+              { label: 'HYBRID ENVELOPE', val: '750 × 525 mm' },
+              { label: 'HEATING ZONES', val: '1600W Ind + 2000W IR + Gas' },
+              { label: 'PRODUCTS DELIVERED', val: '5+ Commercial SKUs' },
+              { label: 'PRODUCTION STAGE', val: 'N5/N10 Pilot & PD-PS' }
+            ],
+            heading: 'Multi-Energy Commercial Kitchen Appliance Engineering',
+            paragraphs: [
+              'Owned end-to-end mechanical and electro-mechanical product development across five commercial and built-in cooktop platforms: Hybrid Cooktop, Electronically Timed Cooktop, 5-Burner Cooktop, Localized Built-in Cooktop, and Localized Built-in Hob.',
+              'Engineered a high-density 750×525 mm commercial hybrid cooktop combining a 1600 W induction coil, a 2000 W infrared radiant heater, and high-output gas burners within a single unified chassis.'
+            ],
+            assetSlot: {
+              filename: 'assets/hybrid-cooktop-assembly.png',
+              caption: 'CAD Assembly Drop-Zone: Replace with sanitized 3D CAD render of the 750×525 mm Hybrid Cooktop assembly (vendor logos redacted).'
+            }
+          },
+          architecture: {
+            kpis: [
+              { label: 'USER INTERFACE', val: 'Dual In-Knob 7-Seg Displays' },
+              { label: 'SAFETY ACTUATION', val: 'FFD + Opposing Solenoid' },
+              { label: 'FAIL-SAFE LOCKOUT', val: '< 2.2 V Low-Battery Cut' },
+              { label: 'LOCALIZATION', val: 'China → India Tooling' }
+            ],
+            heading: 'Electro-Mechanical Packaging & China-to-India Localization',
+            paragraphs: [
+              'Timed Gas Cooktop Architecture: Integrated automatic spark ignition, Flame Failure Device (FFD) thermocouple sensing, opposing-current solenoid valve shutoff, dual in-knob 7-segment timer displays, and a <2.2 V low-battery safety lockout mechanism.',
+              'Localization Engineering: Conducted teardown and DFM audits of China-sourced built-in hobs/cooktops—converting stamped sheet-metal pans, burner supports, and injection-molded knob housings for Indian tooling while isolating critical imported electronics to maximize gross margins.'
+            ],
+            assetSlot: {
+              filename: 'assets/cooktop-internal-packaging.png',
+              caption: 'Sub-Assembly Drop-Zone: Replace with internal sheet-metal chassis, solenoid valve, or thermal shielding CAD layout.'
+            }
+          },
+          validation: {
+            kpis: [
+              { label: 'QUALITY DOCS', val: 'BOM, PFD, PFC, FMEA' },
+              { label: 'INSPECTION GATES', val: 'IQC & OQC Checklists' },
+              { label: 'THERMAL ISOLATION', val: 'PCB & Knob Heat Shielding' },
+              { label: 'PILOT TRIALS', val: 'N5 & N10 Line Runs' }
+            ],
+            heading: 'DFM, FMEA Risk Mitigation & Pilot Line Validation',
+            paragraphs: [
+              'Authored complete production documentation packages including multi-level BOMs, Process Flow Diagrams (PFD), Process Control Plans (PFC), and Design/Process FMEAs.',
+              'Resolved thermal soak issues near the induction/infrared zones by introducing dedicated airflow baffles and standoffs to protect timer PCBs and battery compartments.'
+            ],
+            assetSlot: {
+              filename: 'assets/cooktop-2d-dfm-drawing.png',
+              caption: 'DFM Drawing Drop-Zone: Insert a redacted sheet-metal flat pattern or tolerance drawing snippet here.'
+            }
+          },
+          results: {
+            kpis: [
+              { label: 'HANDOVER STATUS', val: 'PD → PS Completed' },
+              { label: 'PILOT YIELD', val: 'N5 / N10 Validated' },
+              { label: 'COST OPTIMIZATION', val: 'Localized Tooling' },
+              { label: 'VENDOR ECOSYSTEM', val: 'Sheet Metal & Plastics' }
+            ],
+            heading: 'Pilot Production Runs & PD-to-PS Handover',
+            paragraphs: [
+              'Worked hands-on with sheet-metal stamping, glass-tempering, and plastic molding vendors to resolve fitment tolerances during N5 and N10 pilot assembly runs.',
+              'Successfully transitioned designs from Product Development (PD) to Production Support (PS) with standardized IQC/OQC incoming and outgoing inspection protocols.'
+            ],
+            assetSlot: {
+              filename: 'assets/cooktop-pilot-prototype.jpg',
+              caption: 'Prototype Photo Drop-Zone: Insert a photo of the physical cooktop prototype or pilot testing bench here.'
+            }
+          }
+        }
+      },
+
+      powertrain: {
+        org: 'IITK MOTORSPORTS (FORMULA STUDENT EV)',
+        period: 'MAY 2024 – MAR 2025',
+        title: 'Formula Student Drivetrain & AISI 4340 Drive Shaft',
+        tags: ['AISI 4340 Steel', 'ASME Elliptic', 'Involute Splines', 'Fatigue FEA', 'Drivetrain', 'GD&T'],
+        tabs: {
+          overview: {
+            kpis: [
+              { label: 'SHAFT MATERIAL', val: 'AISI 4340 Alloy Steel' },
+              { label: 'FATIGUE CRITERION', val: 'ASME Elliptic' },
+              { label: 'COUPLING GEOMETRY', val: 'Involute Splines' },
+              { label: 'DRIVETRAIN TYPE', val: 'Chain-Sprocket Reduction' }
+            ],
+            heading: 'High-Torque EV Powertrain Transmission Design',
+            paragraphs: [
+              'Engineered the torque-transmission path from the electric motor output to the rear wheel hubs for IITK Motorsports’ Formula Student electric vehicle.',
+              'Focused on minimizing rotational inertia while guaranteeing infinite-life fatigue resistance under peak motor launch torque and regenerative braking reversals.'
+            ],
+            assetSlot: {
+              filename: 'assets/powertrain-drivetrain-cad.png',
+              caption: 'Drivetrain CAD Drop-Zone: Insert your chain-sprocket, differential/spool, and drive shaft assembly CAD render here.'
+            }
+          },
+          architecture: {
+            kpis: [
+              { label: 'GEAR REDUCTION', val: 'Analytical Ratio Opt.' },
+              { label: 'SPLINE PROFILE', val: '30° Pressure Angle Involute' },
+              { label: 'STRESS RELIEF', val: 'Undercut Fillet Radii' },
+              { label: 'MANUFACTURING', val: 'CNC Turning & Hobbing' }
+            ],
+            heading: 'Analytical Drivetrain Sizing & Involute Spline Geometry',
+            paragraphs: [
+              'Conducted analytical calculations and vehicle acceleration simulations to optimize sprocket tooth counts and chain tension loads across autocross and endurance profiles.',
+              'Designed custom involute spline connections at the differential and wheel-hub interfaces to achieve uniform tooth load distribution and compact radial packaging compared to keyed shafts.'
+            ],
+            assetSlot: {
+              filename: 'assets/involute-spline-drawing.png',
+              caption: '2D Drawing Drop-Zone: Insert your drive shaft & involute spline manufacturing drawing with GD&T callouts here.'
+            }
+          },
+          validation: {
+            kpis: [
+              { label: 'FAILURE THEORY', val: 'ASME Elliptic Criterion' },
+              { label: 'TORSIONAL / BENDING', val: 'Combined Cyclic Load' },
+              { label: 'SPLINE SHEAR / CRUSH', val: 'Analytical + FEM Verified' },
+              { label: 'SAFETY FACTOR', val: 'Validated > Target FoS' }
+            ],
+            heading: 'ASME Elliptic Fatigue Calculations & FEM Verification',
+            paragraphs: [
+              'Calculated alternating and mean bending/torsional stresses along stepped shaft shoulders and spline roots using Marin endurance-limit modifying factors (surface finish, size, reliability, stress concentration).',
+              'Cross-verified analytical ASME Elliptic safety factors using static and fatigue FEM simulations in ANSYS to validate spline root stresses under peak launch torque.'
+            ],
+            assetSlot: {
+              filename: 'assets/driveshaft-fatigue-fea.png',
+              caption: 'Fatigue FEA Drop-Zone: Insert your ANSYS safety-factor or torsional shear stress plot on the spline teeth here.'
+            }
+          },
+          results: {
+            kpis: [
+              { label: 'ROTATIONAL INERTIA', val: 'Lightweight Stepped Profile' },
+              { label: 'TRACK RELIABILITY', val: 'Zero Spline Backlash/Failure' },
+              { label: 'INTEGRATION', val: 'Clean Hub & Spool Fitment' },
+              { label: 'COMPETITION', val: 'Overall EV Champion' }
+            ],
+            heading: 'Machining Quality Control & Track Reliability',
+            paragraphs: [
+              'Coordinated precision CNC turning, spline hobbing, and heat treatment of AISI 4340 shafts, inspecting critical bearing journals and spline major/minor diameters.',
+              'Delivered smooth, backlash-free torque transfer throughout competition dynamic events and endurance testing.'
+            ],
+            assetSlot: {
+              filename: 'assets/driveshaft-machined-hardware.jpg',
+              caption: 'Hardware Photo Drop-Zone: Insert photo of the machined AISI 4340 drive shaft and sprocket assembly here.'
+            }
+          }
+        }
+      },
+
+      medtech: {
+        org: 'MEDANTRIK MEDTECH PVT. LTD.',
+        period: 'MAY 2025 – AUG 2025',
+        title: 'Servo-Actuated Wearable Athletic Mask & Variable-Flow Nebulizer',
+        tags: ['SolidWorks Surfacing', 'Micro-Servo Mechanism', 'Ergonomics', 'Flow Simulation', '2D DFM'],
+        tabs: {
+          overview: {
+            kpis: [
+              { label: 'ACTUATION', val: 'Servo Airflow Valve' },
+              { label: 'FACEPIECE', val: 'Contoured Ergonomic Shell' },
+              { label: 'SECONDARY DEVICE', val: 'Variable-Flow Nebulizer' },
+              { label: 'DELIVERABLES', val: 'Production-Ready CAD' }
+            ],
+            heading: 'Active Respiratory Resistance & Medical Aerosol Delivery',
+            paragraphs: [
+              'During my Product Design Internship at Medantrik Medtech, I engineered two respiratory hardware systems: a wearable athletic mask with electronically controlled airflow resistance and a variable airflow-control nebulizer.',
+              'The core challenge was packaging a cylindrical ribbed airflow-control valve and micro-servo actuator onto an anthropometric facepiece without compromising perimeter sealing or weight balance during high-exertion athletic training.'
+            ],
+            assetSlot: {
+              filename: 'assets/image_f906c1.png',
+              bgClass: 'bg-[#a4b0c0]',
+              caption: 'SolidWorks Assembly Render: Wearable athletic respiratory mask showing the contoured ergonomic face shell (blue), strap mounting eyelets, and cylindrical ribbed airflow-control housing (black).'
+            }
+          },
+          architecture: {
+            kpis: [
+              { label: 'FACEPIECE GEOMETRY', val: '3D Anthropometric Contour' },
+              { label: 'VALVE MECHANISM', val: 'Servo-Driven Rotary Aperture' },
+              { label: 'SEAL INTERFACE', val: 'Compliant Perimeter Cushion' },
+              { label: 'SERVICEABILITY', val: 'Modular Cylindrical Housing' }
+            ],
+            heading: 'Ergonomic Surfacing & Cylindrical Valve Mechanism Packaging',
+            paragraphs: [
+              'Developed multiple SolidWorks surface and solid iterations contoured to diverse facial profiles, maximizing contact area along the nasal bridge and jawline while integrating molded strap-retention bosses.',
+              'Coupled a cylindrical ribbed intake/exhaust housing directly to the anterior shell, housing a micro-servo rotary valve that dynamically modulates breathing resistance for real-time lung-capacity monitoring.'
+            ],
+            assetSlot: {
+              filename: 'assets/image_f906c1.png',
+              bgClass: 'bg-[#a4b0c0]',
+              caption: 'Side Profile CAD: Ergonomic facial curvature transition into the anterior cylindrical ribbed valve assembly.'
+            }
+          },
+          validation: {
+            kpis: [
+              { label: 'FLOW EVALUATION', val: 'CAD & Flow Simulations' },
+              { label: 'NEBULIZER CONTROL', val: 'Variable Orifice Metering' },
+              { label: 'COMPLIANCE', val: 'Safety & Assembly DFM' },
+              { label: 'ITERATIONS', val: 'Multi-Gen Prototype Fit' }
+            ],
+            heading: 'Airflow Simulation & Manufacturing-Ready Documentation',
+            paragraphs: [
+              'Evaluated pressure-drop vs. valve-opening characteristics across both the athletic mask and the variable airflow-control nebulizer using CAD flow simulations.',
+              'Generated detailed manufacturing-ready 2D drawings, assembly exploded views, and tolerance specifications to support prototyping, safety compliance, and production readiness.'
+            ],
+            assetSlot: {
+              filename: 'assets/image_f906c1.png',
+              bgClass: 'bg-[#a4b0c0]',
+              caption: 'Production CAD Geometry: Ribbed external grip features and draft-compliant shell geometry prepared for prototyping and molding.'
+            }
+          },
+          results: {
+            kpis: [
+              { label: 'SEALING EFFICIENCY', val: 'Validated via Fit Iterations' },
+              { label: 'MECHANISM RESPONSE', val: 'Smooth Variable Restriction' },
+              { label: 'HANDOVER', val: 'Complete DFM Package' },
+              { label: 'DEVICES ENGINEERED', val: '2 Medical/Fitness Platforms' }
+            ],
+            heading: 'Prototype Validation & Production Readiness',
+            paragraphs: [
+              'Validated fitment, center-of-mass balance, and strap ergonomics across iterative 3D-printed prototypes, refining wall thicknesses and rib structures for durability.',
+              'Delivered complete manufacturing-ready CAD documentation packages for both the wearable respiratory trainer and the variable-flow nebulizer.'
+            ],
+            assetSlot: {
+              filename: 'assets/image_f906c1.png',
+              bgClass: 'bg-[#a4b0c0]',
+              caption: 'Final Design Iteration: Completed SolidWorks assembly ready for prototype testing and manufacturing handoff.'
+            }
+          }
+        }
+      }
+    };
+
+    let currentProjectId = 'accumulator';
+    let currentTabId = 'overview';
+
+    function openProjectModal(projectId) {
+      currentProjectId = projectId;
+      currentTabId = 'overview';
+      const modal = document.getElementById('project-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+      renderModalContent();
+    }
+
+    function closeProjectModal() {
+      const modal = document.getElementById('project-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      document.body.style.overflow = '';
+    }
+
+    function switchModalTab(tabId) {
+      currentTabId = tabId;
+      renderModalContent();
+    }
+
+    function renderModalContent() {
+      const project = caseStudies[currentProjectId];
+      const tabData = project.tabs[currentTabId];
+
+      document.getElementById('modal-org').textContent = project.org;
+      document.getElementById('modal-period').textContent = project.period;
+      document.getElementById('modal-title').textContent = project.title;
+
+      // Update Tab Active Styling
+      document.querySelectorAll('.mtab').forEach(btn => {
+        btn.classList.remove('active', 'bg-sky-600', 'text-white');
+        btn.classList.add('text-slate-600', 'dark:text-slate-300');
+      });
+      const activeBtn = document.getElementById(`mtab-${currentTabId}`);
+      if (activeBtn) {
+        activeBtn.classList.add('active', 'bg-sky-600', 'text-white');
+        activeBtn.classList.remove('text-slate-600', 'dark:text-slate-300');
+      }
+
+      // Render KPI Grid + Narrative + Visual Asset Drop-Zone
+      const kpisHtml = tabData.kpis.map(k => `
+        <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
+          <div class="font-mono text-[10px] text-slate-500 uppercase">${k.label}</div>
+          <div class="font-mono text-xs sm:text-sm font-bold text-slate-900 dark:text-sky-400 mt-0.5">${k.val}</div>
+        </div>
+      `).join('');
+
+      const paragraphsHtml = tabData.paragraphs.map(p => `<p>${p}</p>`).join('');
+
+      document.getElementById('modal-body').innerHTML = `
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          ${kpisHtml}
+        </div>
+
+        <div class="space-y-3">
+          <h4 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white">${tabData.heading}</h4>
+          ${paragraphsHtml}
+        </div>
+
+        <!-- Engineering Visual Artifact Viewer (Click to Zoom in Lightbox + Auto SVG Fallback) -->
+        <div class="rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-950/90 p-4">
+          <div class="flex items-center justify-between font-mono text-[11px] text-slate-500 mb-2">
+            <span>ENGINEERING CAD / FEA ARTIFACT</span>
+            <button onclick="openLightbox('${tabData.assetSlot.filename}', '${tabData.heading.replace(/'/g, "\\'")}')" class="text-sky-600 dark:text-sky-400 hover:underline cursor-pointer">
+              ${tabData.assetSlot.filename} [ZOOM ⤢]
+            </button>
+          </div>
+          <div onclick="openLightbox('${tabData.assetSlot.filename}', '${tabData.heading.replace(/'/g, "\\'")}')" class="cursor-zoom-in overflow-hidden rounded-lg border border-slate-200 dark:border-slate-800 ${tabData.assetSlot.bgClass || 'bg-slate-900'}">
+            <img 
+              src="${tabData.assetSlot.filename}" 
+              alt="${tabData.heading}" 
+              onerror="this.style.display='none'; this.parentElement.nextElementSibling.style.display='flex';"
+              class="w-full max-h-80 object-contain mx-auto hover:scale-[1.02] transition-transform duration-200"
+            />
+          </div>
+          <div class="hidden flex-col items-center justify-center py-8 px-4 text-center rounded-lg bg-slate-900/50 border border-slate-800/80">
+            <svg class="w-8 h-8 text-sky-500/70 mb-2" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+              <circle cx="8.5" cy="8.5" r="1.5"></circle>
+              <polyline points="21 15 16 10 5 21"></polyline>
+            </svg>
+            <p class="font-mono text-xs text-slate-300 max-w-md">${tabData.assetSlot.caption}</p>
+          </div>
+          <p class="mt-2.5 text-xs font-mono text-slate-600 dark:text-slate-400">
+            <strong class="text-slate-800 dark:text-slate-200">FIG:</strong> ${tabData.assetSlot.caption}
+          </p>
+        </div>
+      `;
+
+      // Render Footer Tags
+      document.getElementById('modal-tags').innerHTML = project.tags.map(t =>
+        `<span class="px-2 py-0.5 rounded bg-slate-200/70 dark:bg-slate-800 text-slate-700 dark:text-slate-300">${t}</span>`
+      ).join('');
+    }
+
+    // Lightbox Functions for Full-Resolution CAD & FEA Inspection
+    function openLightbox(src, caption) {
+      const lb = document.getElementById('image-lightbox');
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox-caption').textContent = caption;
+      lb.classList.remove('hidden');
+      lb.classList.add('flex');
+    }
+
+    function closeLightbox() {
+      const lb = document.getElementById('image-lightbox');
+      lb.classList.add('hidden');
+      lb.classList.remove('flex');
+    }
+
+    document.getElementById('image-lightbox').addEventListener('click', (e) => {
+      if (e.target.id === 'image-lightbox') closeLightbox();
+    });
+
+    // Close Modal or Lightbox on Backdrop Click or ESC key
+    document.getElementById('project-modal').addEventListener('click', (e) => {
+      if (e.target.id === 'project-modal') closeProjectModal();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        const lb = document.getElementById('image-lightbox');
+        if (!lb.classList.contains('hidden')) {
+          closeLightbox();
+        } else {
+          closeProjectModal();
+        }
+      }
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeProjectModal();
+    });
+
+    // ---------------------------------------------------------
+    // 5. INTERACTIVE 3D WIREFRAME CAD ENGINE (HTML5 Canvas)
+    // ---------------------------------------------------------
+    const cadModelsData = {
+      accumulator: {
+        hud: 'MODEL: AL6061_T6_ACCUMULATOR_ASSY.GLB',
+        tag: 'HIGH VOLTAGE SUBSYSTEM // IITK MOTORSPORTS',
+        name: '88.8 V, 3.7 kWh AL6061-T6 Enclosure',
+        desc: 'Welded & fastened AL6061-T6 structural battery container housing 3 pouch-cell modules, FR4 isolation barriers, and HV busbars. Validated at 40g in ANSYS.',
+        projectId: 'accumulator',
+        specs: [
+          ['MATERIAL', 'AL6061-T6 (Yield ~310 MPa)'],
+          ['MASS SAVED', '-20.0 kg vs. Mild Steel'],
+          ['PACK RATING', '88.8 V Nominal / 3.7 kWh'],
+          ['CRASH LOAD', '40g Long/Lat • 20g Vert']
+        ]
+      },
+      shaft: {
+        hud: 'MODEL: AISI_4340_DRIVESHAFT_SPLINE.GLB',
+        tag: 'POWERTRAIN SUBSYSTEM // IITK MOTORSPORTS',
+        name: 'AISI 4340 Drive Shaft & Involute Splines',
+        desc: 'Stepped lightweight alloy-steel axle shaft with 30° involute spline couplings. Designed via ASME Elliptic fatigue failure criterion and validated via FEM.',
+        projectId: 'powertrain',
+        specs: [
+          ['ALLOY', 'AISI 4340 High-Tensile Steel'],
+          ['FATIGUE MODEL', 'ASME Elliptic Criterion'],
+          ['COUPLING', 'Involute Spline Profile'],
+          ['VALIDATION', 'Analytical + Fatigue FEA']
+        ]
+      },
+      mask: {
+        hud: 'MODEL: SERVO_AIRFLOW_VALVE_ASSY.GLB',
+        tag: 'MEDICAL DEVICE DESIGN // MEDANTRIK',
+        name: 'Servo-Actuated Respiratory Valve & Mask',
+        desc: 'Ergonomic contoured facepiece with compliant perimeter seal and micro-servo driven rotary aperture for variable respiratory resistance training.',
+        projectId: 'medtech',
+        specs: [
+          ['ACTUATOR', 'Micro-Servo Rotary Valve'],
+          ['CAD METHOD', 'SolidWorks Hybrid Surfacing'],
+          ['SIMULATION', 'Internal Flow & Pressure Drop'],
+          ['OUTPUT', '2D DFM & Assembly Drawings']
+        ]
+      }
+    };
+
+    let activeCadKey = 'accumulator';
+    let rotX = -0.42;
+    let rotY = 0.58;
+    let zoomScale = 1.0;
+    let isDragging = false;
+    let lastMouseX = 0;
+    let lastMouseY = 0;
+
+    const canvas = document.getElementById('cad-canvas');
+    const ctx = canvas.getContext('2d');
+
+    function resizeCadCanvas() {
+      const wrapper = document.getElementById('interactive-wireframe-wrapper');
+      if (!wrapper || !canvas) return;
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = wrapper.clientWidth * dpr;
+      canvas.height = wrapper.clientHeight * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    function project3D(x, y, z, w, h) {
+      // Rotate Y
+      const cosY = Math.cos(rotY);
+      const sinY = Math.sin(rotY);
+      const x1 = x * cosY - z * sinY;
+      const z1 = z * cosY + x * sinY;
+
+      // Rotate X
+      const cosX = Math.cos(rotX);
+      const sinX = Math.sin(rotX);
+      const y2 = y * cosX - z1 * sinX;
+      const z2 = z1 * cosX + y * sinX;
+
+      const fov = 420 * zoomScale;
+      const distance = 360;
+      const scale = fov / (distance + z2);
+
+      return {
+        x: w / 2 + x1 * scale,
+        y: h / 2 + y2 * scale
+      };
+    }
+
+    function drawBox3D(cx, cy, cz, dx, dy, dz, color, w, h) {
+      const hx = dx / 2, hy = dy / 2, hz = dz / 2;
+      const pts = [
+        [-hx, -hy, -hz], [hx, -hy, -hz], [hx, hy, -hz], [-hx, hy, -hz],
+        [-hx, -hy,  hz], [hx, -hy,  hz], [hx, hy,  hz], [-hx, hy,  hz]
+      ].map(([px, py, pz]) => project3D(cx + px, cy + py, cz + pz, w, h));
+
+      const edges = [
+        [0,1],[1,2],[2,3],[3,0],
+        [4,5],[5,6],[6,7],[7,4],
+        [0,4],[1,5],[2,6],[3,7]
+      ];
+
+      ctx.strokeStyle = color;
+      ctx.beginPath();
+      edges.forEach(([i, j]) => {
+        ctx.moveTo(pts[i].x, pts[i].y);
+        ctx.lineTo(pts[j].x, pts[j].y);
+      });
+      ctx.stroke();
+    }
+
+    function drawCylinder3D(cx, cy, cz, radius, length, axis, segments, color, w, h) {
+      const ringA = [];
+      const ringB = [];
+      for (let i = 0; i < segments; i++) {
+        const theta = (i / segments) * Math.PI * 2;
+        const c = Math.cos(theta) * radius;
+        const s = Math.sin(theta) * radius;
+        if (axis === 'x') {
+          ringA.push(project3D(cx - length / 2, cy + c, cz + s, w, h));
+          ringB.push(project3D(cx + length / 2, cy + c, cz + s, w, h));
+        } else {
+          ringA.push(project3D(cx + c, cy + s, cz - length / 2, w, h));
+          ringB.push(project3D(cx + c, cy + s, cz + length / 2, w, h));
+        }
+      }
+
+      ctx.strokeStyle = color;
+      ctx.beginPath();
+      for (let i = 0; i < segments; i++) {
+        const next = (i + 1) % segments;
+        ctx.moveTo(ringA[i].x, ringA[i].y);
+        ctx.lineTo(ringA[next].x, ringA[next].y);
+        ctx.moveTo(ringB[i].x, ringB[i].y);
+        ctx.lineTo(ringB[next].x, ringB[next].y);
+        if (i % 2 === 0) {
+          ctx.moveTo(ringA[i].x, ringA[i].y);
+          ctx.lineTo(ringB[i].x, ringB[i].y);
+        }
+      }
+      ctx.stroke();
+    }
+
+    function renderCadScene() {
+      const wrapper = document.getElementById('interactive-wireframe-wrapper');
+      if (!wrapper || !canvas) return;
+      const w = wrapper.clientWidth;
+      const h = wrapper.clientHeight;
+
+      ctx.clearRect(0, 0, w, h);
+
+      // Subtle Origin Coordinate Triad
+      const origin = project3D(-110, 65, -70, w, h);
+      const axX = project3D(-80, 65, -70, w, h);
+      const axY = project3D(-110, 35, -70, w, h);
+      const axZ = project3D(-110, 65, -40, w, h);
+      ctx.lineWidth = 1.5;
+      ctx.strokeStyle = '#f43f5e'; ctx.beginPath(); ctx.moveTo(origin.x, origin.y); ctx.lineTo(axX.x, axX.y); ctx.stroke();
+      ctx.strokeStyle = '#34d399'; ctx.beginPath(); ctx.moveTo(origin.x, origin.y); ctx.lineTo(axY.x, axY.y); ctx.stroke();
+      ctx.strokeStyle = '#38bdf8'; ctx.beginPath(); ctx.moveTo(origin.x, origin.y); ctx.lineTo(axZ.x, axZ.y); ctx.stroke();
+
+      ctx.lineWidth = 1.3;
+
+      if (activeCadKey === 'accumulator') {
+        // Outer AL6061-T6 Enclosure
+        drawBox3D(0, 0, 0, 190, 74, 120, '#38bdf8', w, h);
+        // 3 Internal Pouch Cell Modules
+        drawBox3D(-56, 2, 0, 48, 58, 102, '#0284c7', w, h);
+        drawBox3D(0, 2, 0, 48, 58, 102, '#0284c7', w, h);
+        drawBox3D(56, 2, 0, 48, 58, 102, '#0284c7', w, h);
+        // HV Busbars on top
+        drawBox3D(-28, -32, -15, 56, 4, 12, '#f59e0b', w, h);
+        drawBox3D(28, -32, 15, 56, 4, 12, '#f59e0b', w, h);
+      } else if (activeCadKey === 'shaft') {
+        // Central AISI 4340 Shaft Body
+        drawCylinder3D(0, 0, 0, 14, 150, 'x', 20, '#38bdf8', w, h);
+        // Left & Right Involute Spline Couplings
+        drawCylinder3D(-92, 0, 0, 20, 34, 'x', 24, '#34d399', w, h);
+        drawCylinder3D(92, 0, 0, 20, 34, 'x', 24, '#34d399', w, h);
+        // Sprocket Carrier Flange
+        drawCylinder3D(-45, 0, 0, 44, 8, 'x', 28, '#f59e0b', w, h);
+      } else if (activeCadKey === 'mask') {
+        // Valve Housing Ring + Servo Actuator Housing
+        drawCylinder3D(0, 0, 0, 52, 26, 'z', 28, '#c084fc', w, h);
+        drawCylinder3D(0, 0, 0, 34, 32, 'z', 24, '#38bdf8', w, h);
+        // Side Micro-Servo Module
+        drawBox3D(58, -10, 4, 34, 24, 22, '#f59e0b', w, h);
+        // Butterfly Aperture Vane
+        drawBox3D(0, 0, 0, 62, 4, 18, '#34d399', w, h);
+      }
+
+      if (!isDragging) {
+        rotY += 0.0045;
+      }
+      requestAnimationFrame(renderCadScene);
+    }
+
+    function switchCadModel(key) {
+      activeCadKey = key;
+      const data = cadModelsData[key];
+
+      document.querySelectorAll('.cad-tab').forEach(btn => {
+        btn.classList.remove('active', 'bg-sky-600', 'text-white');
+        btn.classList.add('bg-white', 'dark:bg-slate-900', 'text-slate-600', 'dark:text-slate-300');
+      });
+      const activeBtn = document.getElementById(`cad-tab-${key}`);
+      if (activeBtn) {
+        activeBtn.classList.add('active', 'bg-sky-600', 'text-white');
+        activeBtn.classList.remove('bg-white', 'dark:bg-slate-900', 'text-slate-600', 'dark:text-slate-300');
+      }
+
+      document.getElementById('cad-hud-title').textContent = data.hud;
+      document.getElementById('cad-spec-tag').textContent = data.tag;
+      document.getElementById('cad-spec-name').textContent = data.name;
+      document.getElementById('cad-spec-desc').textContent = data.desc;
+
+      document.getElementById('cad-spec-table').innerHTML = data.specs.map(([k, v]) => `
+        <div class="flex items-center justify-between py-1.5 border-b border-slate-100 dark:border-slate-800/80">
+          <span class="text-slate-500">${k}</span>
+          <span class="font-semibold text-slate-900 dark:text-slate-200">${v}</span>
+        </div>
+      `).join('');
+
+      document.getElementById('cad-open-case-btn').onclick = () => openProjectModal(data.projectId);
+    }
+
+    function resetCadCamera() {
+      rotX = -0.42;
+      rotY = 0.58;
+      zoomScale = 1.0;
+    }
+
+    // Mouse & Touch Orbit Controls for CAD Canvas
+    canvas.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      lastMouseX = e.clientX;
+      lastMouseY = e.clientY;
+    });
+    window.addEventListener('mouseup', () => { isDragging = false; });
+    window.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      const dx = e.clientX - lastMouseX;
+      const dy = e.clientY - lastMouseY;
+      rotY += dx * 0.01;
+      rotX += dy * 0.01;
+      lastMouseX = e.clientX;
+      lastMouseY = e.clientY;
+    });
+
+    canvas.addEventListener('touchstart', (e) => {
+      if (e.touches.length === 1) {
+        isDragging = true;
+        lastMouseX = e.touches[0].clientX;
+        lastMouseY = e.touches[0].clientY;
+      }
+    }, { passive: true });
+    window.addEventListener('touchend', () => { isDragging = false; });
+    canvas.addEventListener('touchmove', (e) => {
+      if (!isDragging || e.touches.length !== 1) return;
+      const dx = e.touches[0].clientX - lastMouseX;
+      const dy = e.touches[0].clientY - lastMouseY;
+      rotY += dx * 0.012;
+      rotX += dy * 0.012;
+      lastMouseX = e.touches[0].clientX;
+      lastMouseY = e.touches[0].clientY;
+    }, { passive: true });
+
+    canvas.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      zoomScale = Math.min(1.8, Math.max(0.6, zoomScale - e.deltaY * 0.001));
+    }, { passive: false });
+
+    window.addEventListener('resize', resizeCadCanvas);
+
+    // Initialize on Window Load
+    window.onload = function () {
+      switchCadModel('accumulator');
+      resizeCadCanvas();
+      renderCadScene();
+    };
+  </script>
+</body>
+</html>
